@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>React</title>
+    <link rel="stylesheet" type="text/css" href="../../css/main.css">
+    <script src="../../js/react.js"></script>
+    <script src="../../js/react-dom.min.js"></script>
+    <script src="../../js/browser.min.js"></script>
+</head>
+<body>
+
+    <div id="container"></div>
+
+    <script type="text/babel">
+
+        var Comments = React.createClass({
+            getInitialState: function(){
+                return{editing:false}
+            },
+            edit: function(){
+                this.setState({editing: true});
+            },
+            remove: function(){
+                console.log('Deleting');
+            },
+            save: function(){
+                var val = this.refs.newText.value;
+                console.log('New Text: '+val);
+                this.setState({editing: false});
+            },
+            change: function() {
+                this.setState({checked: true});
+            },
+            renderNormal: function(){
+                return(
+                    <div className="commentContainer">
+                        <div className="commentText">{this.props.children}</div>
+                        <button onClick={this.edit} className="button-primary" >Edit</button>
+                        <button onClick={this.edit} className="button-danger" >Remove</button>
+                    </div>
+                );
+            },
+            renderForm: function(){
+                return(
+                    <div className="commentContainer">
+                        <div>
+                            <textArea ref="newText" defaultValue={this.props.children}></textArea>
+                        </div>
+                        <button className="button-primary" onClick={this.save}>Save</button>
+                    </div>
+                );
+            },
+
+            render: function(){
+                if(this.state.editing){
+                    return this.renderForm();
+                }else{
+                    return this.renderNormal();
+                }
+            }
+        });
+
+        ReactDOM.render(
+            <div>
+                <Comments>Ayush</Comments>
+                <Comments>Megha</Comments>
+                <Comments>Ayusme</Comments>
+            </div>, document.getElementById('container'));
+    </script>
+
+</body>
+</html>

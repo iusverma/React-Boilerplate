@@ -48,7 +48,7 @@
                 return(
                     <div className="commentContainer">
                             <textArea ref="newText" defaultValue={this.props.children}></textArea>
-                        <button className="button-success" onClick={this.save}>Save</button>
+                        <button className="button-primary" onClick={this.save}>Save</button>
                     </div>
                 );
             },
@@ -72,12 +72,6 @@
                     ]
                 };
             },
-            addComment: function(text){
-                console.log('addComment');
-                var arr = this.state.comments;
-                arr.push(text);
-                this.setState({comments: arr});
-            },
             removeComment: function(i){
                 console.log('removeComments');
                 var arr = this.state.comments;
@@ -100,13 +94,10 @@
             },
             render: function(){
                 return(
-                    <div>
-                        <button onClick={this.addComment.bind(null, 'default text')} className="button-info create">Add New</button>
-                        <div className="board">
+                    <div className="board">
                         {
                             this.state.comments.map(this.eachComment)
                         }
-                        </div>
                     </div>
                 );
             }
